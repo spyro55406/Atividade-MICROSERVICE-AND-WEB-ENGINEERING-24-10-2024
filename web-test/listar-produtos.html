@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Produtos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Lista de Produtos</h2>
+        <ul class="list-group" id="productList"></ul>
+        <a href="cadastrar-produto.html" class="btn btn-primary mt-3">Cadastrar Mais Produtos</a>
+    </div>
+
+    <script>
+        function loadProducts() {
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+            const productList = document.getElementById('productList');
+            productList.innerHTML = '';
+
+            products.forEach(product => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('list-group-item');
+                listItem.textContent = `Nome: ${product.name} | Preço: R$${product.price.toFixed(2)} | Quantidade: ${product.quantity} | Data de Criação: ${product.date}`;
+                productList.appendChild(listItem);
+            });
+        }
+
+
+        loadProducts();
+    </script>
+</body>
+</html>
